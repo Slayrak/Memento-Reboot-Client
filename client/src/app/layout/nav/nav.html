@@ -1,5 +1,5 @@
-<header class="w-full fixed top-0 p-3 z-50 bg-purple-600">
-    <div class="flex flex-row w-full align-middle items-center justify-between px-10 mx-auto gap-6">
+<header class="w-full max-h-1/10 fixed top-0 p-3 z-50 bg-purple-600">
+    <div class="flex flex-row w-full align-middle items-center justify-between px-10 mx-auto gap-6 max-h-3/9">
         <a class="max-h-16 text-white">
             Memento Reboot
         </a>
@@ -11,7 +11,8 @@
                     <li><a>Dictation</a></li>
                 </ul>
         </div>
-        <div class="grow-2 flex justify-center">
+        
+        <div class="grow-2 flex justify-center" [style.visibility]="accountService.currentUser() ? 'visible': 'hidden'">
             <label class="input bg-white max-w-5/10 w-full">
                 <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <g
@@ -30,12 +31,36 @@
         </div>
         
         <div class="flex flex-row align-middle items-center">
-            <button class="btn bg-purple-600 shadow-none border-0 hover:bg-purple-700 hover:border-white">
-                Log in
-            </button>
-            <button class="btn bg-purple-600 shadow-none border-0 hover:bg-purple-700 hover:border-white">
-                Sign up
-            </button>
+            @if(accountService.currentUser()) {
+                <div class="dropdown dropdown-end dropdown-hover text-lg text-white my-2 bg-purple-600">
+                    <div tabindex="0" class="shadow-none">
+                        <div class="avatar">
+                            <div class="w-8 rounded-full m-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                        <ul tabindex="-1" class="menu dropdown-content bg-purple-700 rounded-box z-1 w-52 p-2">
+                            <li><a>Profile</a></li>
+                            <li><a>Decks</a></li>
+                            <li><a>Log out</a></li>
+                        </ul>
+                </div>
+            }
+            @else {
+                <button class="btn bg-purple-600 shadow-none border-0 hover:bg-purple-700 hover:border-white"
+                onclick="creds_modal.showModal()">
+                    Log in
+                </button>
+                <button class="btn bg-purple-600 shadow-none border-0 hover:bg-purple-700 hover:border-white"
+                onclick="creds_modal.showModal()">
+                    Sign up
+                </button>
+            }
         </div>
     </div>
 </header>
+
+<credentials-popup #creds_modal/>

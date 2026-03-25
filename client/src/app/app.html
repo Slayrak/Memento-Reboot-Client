@@ -1,1 +1,25 @@
 <app-nav />
+
+@if (!user()) {
+    <div class="hero bg-base-200 min-h-screen">
+        <div class="hero-content flex-col text-center w-1/2">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold">Memento</h1>
+                <p class="py-4">
+                </p>
+            </div>
+            <div class="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
+                <div class="card-body">
+                    <form class="flex flex-col justify-center align-middle">
+                        <input type="text" placeholder="Username" class="input mb-3 w-full" [formField]="credsForm.userName"/>
+                        <input type="password" placeholder="Password" class="input w-full mb-2" [formField]="credsForm.password"/>
+                        <a href="" class="text-sm text-gray-400 hover:text-purple-400 mb-8 text-start">Forgot password?</a>
+                        <button type="submit" 
+                        class="btn w-full text-base text-white bg-purple-400 hover:bg-purple-600 disabled:bg-gray-400"
+                        (click)="login()">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
