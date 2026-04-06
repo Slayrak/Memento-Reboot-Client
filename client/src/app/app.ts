@@ -26,6 +26,10 @@ export class App {
   protected readonly user = this.accountService.currentUser;
   protected readonly title = signal('client');
 
+  async ngOnInit() {
+    this.setCurrentUser();
+  }
+
   login() {
     this.accountService.login(this.credsModel()).subscribe({
       next: result => {
